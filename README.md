@@ -5,11 +5,11 @@
 
 ### Server Configuration
 
+* Clone Project to local,CD to backend directory and run composer update command
 * Create database "task"
 * Import Database which is located in database folder
 * You can also import database through migration, CD to backend directory and run command
 ```php artisan migrate``` this command will import database.
-* Clone Project to local,CD to backend directory and run composer update command
 * Add virtual host, the one i have used was *http://task.local/api*
 * Add entry in httpd-vhosts.conf file
 ```
