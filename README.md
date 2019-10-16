@@ -5,7 +5,7 @@
 
 ### Server Configuration
 
-* Clone Project to local,CD to backend directory and run composer update command
+* Clone Project to local,CD to backend directory and run ```composer update``` command
 * Create database "task"
 * Import Database which is located in database folder
 * You can also import database through migration, CD to backend directory and run command
