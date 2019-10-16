@@ -3,10 +3,14 @@
 namespace App\Exceptions;
 
 use Exception;
+use App\Traits\ApiResponseTrait;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
 
 class Handler extends ExceptionHandler
 {
+    use ApiResponseTrait;
     /**
      * A list of the exception types that are not reported.
      *
@@ -46,6 +50,24 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof ValidationException) {
+            return $this->convertValidationExceptionToResponse($exception, $request);
+        } else if ($exception instanceof ModelNotFoundException) {
+            return $this->errorResponse(['message' => 'Record not found']);
+        }
         return parent::render($request, $exception);
+    }
+
+    /**
+     * Create a response object from the given validation exception.
+     *
+     * @param  \Illuminate\Validation\ValidationException  $e
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    protected function convertValidationExceptionToResponse(ValidationException $e, $request)
+    {
+        $errors = $e->validator->errors()->getMessages();
+        return $this->errorResponse($errors, 422);
     }
 }
