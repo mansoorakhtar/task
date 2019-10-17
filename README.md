@@ -46,7 +46,7 @@ inside ```frontend/src/axios-instance.js```
 ### Frontend Configuration
 
 * CD to frontend directory and run ```npm update```
-* after dependency installation run command "npm start"
+* after dependency installation run command ```npm start```
 * open browser and enter url *http://localhost:3000*
 
    
